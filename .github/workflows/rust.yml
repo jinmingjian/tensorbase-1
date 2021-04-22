@@ -22,10 +22,11 @@ jobs:
         override: true
         components: rustfmt, clippy
     - uses: actions/checkout@v2
-    - name: Build
-      run: cargo build
-    - run: mkdir ${{ github.workspace }}/tb_data
-    - name: Run server
+    - name: TensorBase Release Build
+      run: cargo build --release
+    - name: TensorBase Prepare data dirs
+      run: mkdir ${{ github.workspace }}/tb_data
+    - name: TensorBase Run server
       run: |
            cargo run --bin server -- -s "$BASE_CONF" > out & 
       env:
@@ -37,8 +38,12 @@ jobs:
             data_dirs_clickhouse = ""          
             [server]                           
             ip_addr = "localhost"              
-            port = 9528                        
-    - name: Done
-      run: cat out
+            port = 9528   
+    - name: TensorBase wait for server up
+      uses: jakejarvis/wait-action@master
+      with:
+        time: '8s'
+    - name: TensorBase integ tests 01
+      run: cargo bench --bench bench_ingestion --package tests_integ
      
     
