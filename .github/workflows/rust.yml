@@ -15,27 +15,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Install latest nightly
-      uses: actions-rs/toolchain@v1
-      with:
-        toolchain: nightly
-        override: true
-        components: rustfmt, clippy
-    - uses: actions/checkout@v2
-    - name: Build
-      run: cargo build
+#     - name: Install latest nightly
+#       uses: actions-rs/toolchain@v1
+#       with:
+#         toolchain: nightly
+#         override: true
+#         components: rustfmt, clippy
+#     - uses: actions/checkout@v2
+#     - name: Build
+#       run: cargo build
     - name: Run server
       run: |
-           cargo run --bin server -- -s \
-           '[system]                   \
-            meta_dirs = ["/jin/tmp/tb_schema"] \
-            data_dirs = ["/jin/tmp/tb_data"]   \
-            [storage]                          \
-            data_dirs_clickhouse = ""          \
-            [server]                           \
-            ip_addr = "localhost"              \
-            port = 9528                        \
-            ' &
+           echo "$XXX"
+      env:
+          XXX: |
+            [system]                  
+            meta_dirs = ["/jin/tmp/tb_schema"] 
+            data_dirs = ["/jin/tmp/tb_data"]   
+            [storage]                          
+            data_dirs_clickhouse = ""          
+            [server]                           
+            ip_addr = "localhost"              
+            port = 9528                        
     - name: Done
       run: echo "done"
      
