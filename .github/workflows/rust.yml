@@ -15,20 +15,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-#     - name: Install latest nightly
-#       uses: actions-rs/toolchain@v1
-#       with:
-#         toolchain: nightly
-#         override: true
-#         components: rustfmt, clippy
-#     - uses: actions/checkout@v2
-#     - name: Build
-#       run: cargo build
+    - name: Install latest nightly
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: nightly
+        override: true
+        components: rustfmt, clippy
+    - uses: actions/checkout@v2
+    - name: Build
+      run: cargo build
     - name: Run server
       run: |
-           echo "$XXX"
+           cargo run --bin server -- -s "$BASE_CONF" > out & 
       env:
-          XXX: |
+          BASE_CONF: |
             [system]                  
             meta_dirs = ["${{ github.workspace }}/tb_schema"] 
             data_dirs = ["${{ github.workspace }}/tb_data"]   
@@ -38,6 +38,6 @@ jobs:
             ip_addr = "localhost"              
             port = 9528                        
     - name: Done
-      run: echo "done"
+      run: cat out
      
     
