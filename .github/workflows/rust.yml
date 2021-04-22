@@ -24,6 +24,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build
       run: cargo build
+    - run: mkdir ${{ github.workspace }}/tb_data
     - name: Run server
       run: |
            cargo run --bin server -- -s "$BASE_CONF" > out & 
