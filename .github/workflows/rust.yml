@@ -40,9 +40,11 @@ jobs:
             ip_addr = "localhost"              
             port = 9528   
     - name: TensorBase wait for server up
-      uses: jakejarvis/wait-action@master
+      uses: juliangruber/sleep-action@v1
       with:
-        time: '8s'
+           time: 10s
+    - name: TensorBase unit tests
+      run: cargo test --exclude 'arrow*' --exclude datafusion --exclude parquet --workspace -- --test-threads=1
     - name: TensorBase integ tests 01
       run: cargo bench --bench bench_ingestion --package tests_integ
      
