@@ -26,7 +26,7 @@ jobs:
       run: cargo build
     - name: Run server
       run: |
-           cargo run --bin server -s \
+           cargo run --bin server -- -s \
            '[system]                   \
             meta_dirs = ["/jin/tmp/tb_schema"] \
             data_dirs = ["/jin/tmp/tb_data"]   \
