@@ -10,17 +10,17 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build:
-
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
-
+    container:
+      image: amd64/rust
     steps:
-    - name: Install latest nightly
-      uses: actions-rs/toolchain@v1
-      with:
-        toolchain: nightly-2021-04-22
-        override: true
-        components: rustfmt, clippy
-    - uses: actions/checkout@v2
-    - name: Build
-      run: cargo build
+      - uses: actions/checkout@v2
+      - name: Setup toolchain
+        run: |
+          rustup toolchain install stable
+          rustup default stable
+          rustup component add rustfmt
+      - name: Run
+        run: cargo build
