@@ -21,6 +21,5 @@ jobs:
         run: |
           rustup toolchain install nightly-2021-04-26
           rustup default nightly-2021-04-26
-          rustup component add rustfmt
       - name: Run
         run: cargo build
