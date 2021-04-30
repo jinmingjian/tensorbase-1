@@ -19,7 +19,7 @@ jobs:
     - name: Install latest nightly
       uses: actions-rs/toolchain@v1
       with:
-            toolchain: nightly-2021-04-26
+            toolchain: nightly-2021-04-21
             override: true
     - name: TensorBase Run server
       run: |
