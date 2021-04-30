@@ -18,7 +18,7 @@ jobs:
     - name: Install latest nightly
       uses: actions-rs/toolchain@v1
       with:
-        toolchain: nightly
+        toolchain: nightly-2021-04-22
         override: true
         components: rustfmt, clippy
     - uses: actions/checkout@v2
@@ -39,13 +39,5 @@ jobs:
             [server]                           
             ip_addr = "localhost"              
             port = 9528   
-    - name: TensorBase wait for server up
-      uses: juliangruber/sleep-action@v1
-      with:
-           time: 10s
-    - name: TensorBase unit tests
-      run: cargo test --exclude 'arrow*' --exclude datafusion --exclude parquet --workspace -- --test-threads=1
-    - name: TensorBase integ tests 01
-      run: cargo bench --bench bench_ingestion --package tests_integ
      
     
